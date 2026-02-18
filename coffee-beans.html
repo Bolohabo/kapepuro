@@ -21,8 +21,10 @@
     </header>
 
     <section class="hero">
-        <h2>Explore Coffee Beans</h2>
-        <p>Learn about local coffee beans, their origin, flavor profile, and specialties.</p>
+        <div class="hero-content">
+            <h2>Explore Coffee Beans</h2>
+            <p>Learn about local coffee beans, their origin, flavor profile, and specialties.</p>
+        </div>
     </section>
 
     <section class="filters">
@@ -65,13 +67,13 @@
 
             data.forEach(bean => {
                 beanList.innerHTML += `
-            <div class="card">
-                <img src="${bean.image}" alt="${bean.name}" class="card-image">
-                <h3>${bean.name}</h3>
-                <p><strong>Origin:</strong> ${bean.origin}</p>
-                <p><strong>Flavor:</strong> ${bean.flavor}</p>
-            </div>
-        `;
+                    <div class="card">
+                        <img src="${bean.image}" alt="${bean.name}" class="card-image" loading="lazy">
+                        <h3>${bean.name}</h3>
+                        <p><strong>Origin:</strong> ${bean.origin}</p>
+                        <p><strong>Flavor:</strong> ${bean.flavor}</p>
+                    </div>
+                `;
             });
         }
 

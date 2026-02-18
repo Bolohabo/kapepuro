@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-
 <head>
     <meta charset="UTF-8">
     <title>Types of Coffee - Kape Ta Iloilo</title>
@@ -21,10 +20,20 @@
         </nav>
     </header>
 
-    <h2>Types of Coffee</h2>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Types of Coffee</h2>
+            <p>Learn about different coffee types, flavors, and origins in Iloilo.</p>
+        </div>
+    </section>
 
-    <input type="text" id="coffeeSearch" placeholder="Search coffee type..." />
+    <!-- Filter/Search Section -->
+    <section class="filters">
+        <input type="text" id="coffeeSearch" placeholder="Search coffee type..." />
+    </section>
 
+    <!-- Card Grid -->
     <div id="coffeeTypeList"></div>
 
     <footer>
@@ -38,7 +47,7 @@
         const coffeeSearch = document.getElementById("coffeeSearch");
 
         async function loadCoffeeTypes() {
-            let data = await fetchData("typesofCoffee.json"); // Ensure this is in /public/data/
+            let data = await fetchData("typesofCoffee.json");
 
             const keyword = coffeeSearch.value.toLowerCase();
 
@@ -55,18 +64,25 @@
         function displayCoffeeTypes(data) {
             coffeeTypeList.innerHTML = "";
 
+            if (data.length === 0) {
+                coffeeTypeList.innerHTML = "<p style='text-align:center; margin-top:20px;'>No coffee types found.</p>";
+                return;
+            }
+
             data.forEach(item => {
                 coffeeTypeList.innerHTML += `
-            <div class="card">
-                <img src="${item.image}" alt="${item.name}" class="card-image">
-                <h3>${item.name}</h3>
-                <p>${item.description}</p>
-            </div>
-        `;
+                    <div class="card">
+                        <img src="${item.image}" alt="${item.name}" class="card-image" loading="lazy">
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                    </div>
+                `;
             });
         }
 
         coffeeSearch.addEventListener("input", loadCoffeeTypes);
+
+        // Initial load
         loadCoffeeTypes();
     </script>
 

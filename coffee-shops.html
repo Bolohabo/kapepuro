@@ -21,8 +21,10 @@
     </header>
 
     <section class="hero">
-        <h2>Explore Coffee Shops in Iloilo</h2>
-        <p>Discover the best local cafes, specialty coffee, and cozy spots around the city.</p>
+        <div class="hero-content">
+            <h2>Explore Coffee Shops in Iloilo</h2>
+            <p>Discover the best local cafes, specialty coffee, and cozy spots around the city.</p>
+        </div>
     </section>
 
     <section class="filters">
@@ -72,14 +74,14 @@
 
             data.forEach(shop => {
                 shopList.innerHTML += `
-            <div class="card">
-                <img src="${shop.image}" alt="${shop.name}" class="card-image">
-                <h3>${shop.name}</h3>
-                <p><strong>District:</strong> ${shop.district}</p>
-                <p><strong>Type:</strong> ${shop.type}</p>
-                <p><strong>Specialty:</strong> ${shop.specialty}</p>
-            </div>
-        `;
+                <div class="card">
+                    <img src="${shop.image}" alt="${shop.name}" class="card-image" loading="lazy">
+                    <h3>${shop.name}</h3>
+                    <p><strong>District:</strong> ${shop.district}</p>
+                    <p><strong>Type:</strong> ${shop.type}</p>
+                    <p><strong>Specialty:</strong> ${shop.specialty}</p>
+                </div>
+            `;
             });
         }
 

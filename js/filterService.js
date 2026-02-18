@@ -1,5 +1,10 @@
 export function filterByDistrict(data, district) {
     if (!district) return data;
-    return data.filter(item => item.district === district);
-}
 
+    const normalizedDistrict = district.trim().toLowerCase();
+
+    return data.filter(item => {
+        if (!item.district) return false; // Safety check
+        return item.district.trim().toLowerCase() === normalizedDistrict;
+    });
+}
