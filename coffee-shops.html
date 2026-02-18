@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Coffee Shops - Kape Ta Iloilo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Kape Ta Iloilo ☕</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="coffee-shops.html">Coffee Shops</a>
+            <a href="coffee-beans.html">Coffee Beans</a>
+            <a href="brewing-guide.html">Brewing Guide</a>
+            <a href="types-of-coffee.html">Types of Coffee</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Explore Coffee Shops in Iloilo</h2>
+        <p>Discover the best local cafes, specialty coffee, and cozy spots around the city.</p>
+    </section>
+
+    <section class="filters">
+        <input type="text" id="searchInput" placeholder="Search coffee shop..." />
+        <select id="districtFilter">
+            <option value="">All Districts</option>
+            <option value="La Paz">La Paz</option>
+            <option value="Mandurriao">Mandurriao</option>
+            <option value="City Proper">City Proper</option>
+        </select>
+    </section>
+
+    <div id="shopList"></div>
+
+    <footer>
+        <p>© 2026 Kape Ta Iloilo</p>
+    </footer>
+
+    <script type="module">
+        import { fetchData } from './js/dataService.js';
+        import { filterByDistrict } from './js/filterService.js';
+        import { searchData } from './js/searchService.js';
+
+        const shopList = document.getElementById("shopList");
+        const searchInput = document.getElementById("searchInput");
+        const districtFilter = document.getElementById("districtFilter");
+
+        async function loadShops() {
+            let data = await fetchData("coffeeShops.json");
+
+            const keyword = searchInput.value;
+            const district = districtFilter.value;
+
+            data = searchData(data, keyword);
+            data = filterByDistrict(data, district);
+
+            displayShops(data);
+        }
+
+        function displayShops(data) {
+            shopList.innerHTML = "";
+
+            if (data.length === 0) {
+                shopList.innerHTML = "<p style='text-align:center; margin-top:20px;'>No coffee shops found.</p>";
+                return;
+            }
+
+            data.forEach(shop => {
+                shopList.innerHTML += `
+            <div class="card">
+                <img src="${shop.image}" alt="${shop.name}" class="card-image">
+                <h3>${shop.name}</h3>
+                <p><strong>District:</strong> ${shop.district}</p>
+                <p><strong>Type:</strong> ${shop.type}</p>
+                <p><strong>Specialty:</strong> ${shop.specialty}</p>
+            </div>
+        `;
+            });
+        }
+
+        searchInput.addEventListener("input", loadShops);
+        districtFilter.addEventListener("change", loadShops);
+
+        // Initial load
+        loadShops();
+    </script>
+
+</body>
+
+</html>

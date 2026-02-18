@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Brewing Guide - Kape Ta Iloilo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Kape Ta Iloilo ☕</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="coffee-shops.html">Coffee Shops</a>
+            <a href="coffee-beans.html">Coffee Beans</a>
+            <a href="brewing-guide.html">Brewing Guide</a>
+            <a href="types-of-coffee.html">Types of Coffee</a>
+        </nav>
+    </header>
+
+    <h2>Brewing & Preparation Guide</h2>
+
+    <input type="text" id="brewSearch" placeholder="Search brewing method..." />
+
+    <div id="brewList"></div>
+
+    <footer>
+        <p>© 2026 Kape Ta Iloilo</p>
+    </footer>
+
+    <script type="module">
+        import { fetchData } from './js/dataService.js';
+
+        const brewList = document.getElementById("brewList");
+        const brewSearch = document.getElementById("brewSearch");
+
+        async function loadBrewingGuides() {
+            let data = await fetchData("brewingGuide.json");
+
+            const keyword = brewSearch.value.toLowerCase();
+
+            if (keyword) {
+                data = data.filter(item =>
+                    item.method.toLowerCase().includes(keyword)
+                );
+            }
+
+            displayBrews(data);
+        }
+
+        function displayBrews(data) {
+            brewList.innerHTML = "";
+
+            data.forEach(item => {
+                brewList.innerHTML += `
+        <div class="card">
+            <img src="${item.image}" alt="${item.method}" class="card-image">
+            <h3>${item.method}</h3>
+            <p><strong>Steps:</strong> ${item.steps}</p>
+        </div>
+        `;
+            });
+        }
+
+        brewSearch.addEventListener("input", loadBrewingGuides);
+        loadBrewingGuides();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Types of Coffee - Kape Ta Iloilo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Kape Ta Iloilo ☕</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="coffee-shops.html">Coffee Shops</a>
+            <a href="coffee-beans.html">Coffee Beans</a>
+            <a href="brewing-guide.html">Brewing Guide</a>
+            <a href="types-of-coffee.html">Types of Coffee</a>
+        </nav>
+    </header>
+
+    <h2>Types of Coffee</h2>
+
+    <input type="text" id="coffeeSearch" placeholder="Search coffee type..." />
+
+    <div id="coffeeTypeList"></div>
+
+    <footer>
+        <p>© 2026 Kape Ta Iloilo</p>
+    </footer>
+
+    <script type="module">
+        import { fetchData } from './js/dataService.js';
+
+        const coffeeTypeList = document.getElementById("coffeeTypeList");
+        const coffeeSearch = document.getElementById("coffeeSearch");
+
+        async function loadCoffeeTypes() {
+            let data = await fetchData("typesofCoffee.json"); // Ensure this is in /public/data/
+
+            const keyword = coffeeSearch.value.toLowerCase();
+
+            if (keyword) {
+                data = data.filter(item =>
+                    item.name.toLowerCase().includes(keyword) ||
+                    item.description.toLowerCase().includes(keyword)
+                );
+            }
+
+            displayCoffeeTypes(data);
+        }
+
+        function displayCoffeeTypes(data) {
+            coffeeTypeList.innerHTML = "";
+
+            data.forEach(item => {
+                coffeeTypeList.innerHTML += `
+            <div class="card">
+                <img src="${item.image}" alt="${item.name}" class="card-image">
+                <h3>${item.name}</h3>
+                <p>${item.description}</p>
+            </div>
+        `;
+            });
+        }
+
+        coffeeSearch.addEventListener("input", loadCoffeeTypes);
+        loadCoffeeTypes();
+    </script>
+
+</body>
+
+</html>

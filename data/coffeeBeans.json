@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Arabica",
+        "origin": "Benguet",
+        "flavor": "Sweet, fruity",
+        "image": "assets/images/beans/arabica.jpg"
+    },
+    {
+        "name": "Robusta",
+        "origin": "Mindanao",
+        "flavor": "Strong, bold",
+        "image": "assets/images/beans/robusta.jpg"
+    }
+]

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Coffee Beans - Kape Ta Iloilo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Kape Ta Iloilo ☕</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="coffee-shops.html">Coffee Shops</a>
+            <a href="coffee-beans.html">Coffee Beans</a>
+            <a href="brewing-guide.html">Brewing Guide</a>
+            <a href="types-of-coffee.html">Types of Coffee</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Explore Coffee Beans</h2>
+        <p>Learn about local coffee beans, their origin, flavor profile, and specialties.</p>
+    </section>
+
+    <section class="filters">
+        <input type="text" id="beanSearch" placeholder="Search coffee bean..." />
+    </section>
+
+    <div id="beanList"></div>
+
+    <footer>
+        <p>© 2026 Kape Ta Iloilo</p>
+    </footer>
+
+    <script type="module">
+        import { fetchData } from './js/dataService.js';
+
+        const beanList = document.getElementById("beanList");
+        const beanSearch = document.getElementById("beanSearch");
+
+        async function loadBeans() {
+            let data = await fetchData("coffeeBeans.json");
+
+            const keyword = beanSearch.value.toLowerCase();
+
+            if (keyword) {
+                data = data.filter(bean =>
+                    bean.name.toLowerCase().includes(keyword)
+                );
+            }
+
+            displayBeans(data);
+        }
+
+        function displayBeans(data) {
+            beanList.innerHTML = "";
+
+            if (data.length === 0) {
+                beanList.innerHTML = "<p style='text-align:center; margin-top:20px;'>No coffee beans found.</p>";
+                return;
+            }
+
+            data.forEach(bean => {
+                beanList.innerHTML += `
+            <div class="card">
+                <img src="${bean.image}" alt="${bean.name}" class="card-image">
+                <h3>${bean.name}</h3>
+                <p><strong>Origin:</strong> ${bean.origin}</p>
+                <p><strong>Flavor:</strong> ${bean.flavor}</p>
+            </div>
+        `;
+            });
+        }
+
+        beanSearch.addEventListener("input", loadBeans);
+
+        // Initial load
+        loadBeans();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Madge Cafe",
+        "district": "La Paz",
+        "type": "Local",
+        "specialty": "Native Coffee",
+        "image": "assets/images/shops/madge-cafe.jpg"
+    },
+    {
+        "name": "Coffeebreak",
+        "district": "City Proper",
+        "type": "Commercial",
+        "specialty": "Espresso",
+        "image": "assets/images/shops/coffeebreak.jpg"
+    },
+    {
+        "name": "The Good Locals",
+        "district": "Mandurriao",
+        "type": "Specialty",
+        "specialty": "Pour Over",
+        "image": "assets/images/shops/thegoodlocals.jpg"
+    }
+]

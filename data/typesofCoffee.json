@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Espresso",
+        "description": "A concentrated coffee brewed by forcing hot water through finely-ground coffee.",
+        "image": "assets/images/coffeetypes/espresso.jpg"
+    },
+    {
+        "name": "Cappuccino",
+        "description": "Espresso with steamed milk and milk foam.",
+        "image": "assets/images/coffeetypes/capuccino.jpg"
+    },
+    {
+        "name": "Latte",
+        "description": "Espresso with more steamed milk and a light layer of foam.",
+        "image": "assets/images/coffeetypes/latte.jpg"
+    }
+]

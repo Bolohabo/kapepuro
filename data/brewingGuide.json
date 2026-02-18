@@ -1,0 +1,17 @@
+[
+    {
+        "method": "French Press",
+        "steps": "Add coarse coffee, pour hot water, stir, steep for 4 mins, press, serve.",
+        "image": "assets/images/brewing/frenchpress.jpg"
+    },
+    {
+        "method": "Espresso",
+        "steps": "Pack finely ground coffee, force hot water under pressure, serve immediately.",
+        "image": "assets/images/brewing/espressomachine.jpg"
+    },
+    {
+        "method": "Pour Over",
+        "steps": "Place filter, add medium ground coffee, pour hot water slowly in circles, serve.",
+        "image": "assets/images/brewing/pourover.jpg"
+    }
+]
